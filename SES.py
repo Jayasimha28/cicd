@@ -1,32 +1,36 @@
 import boto3
 
-ses = boto3.client('ses')
+def lambda_handler(event,context):
 
-body = """
-Hello, This is from Lambda, implemented by Jay
-Thanks & Regards,
-Jayasimha
-"""
+    ses = boto3.client('ses')
 
-ses.send_email(
-	Source = 'cherlopallijayasimha@gmail.com',
-	Destination={
-		'ToAddresses': [
-			# 'jayasimha.cherlopalli@cognizant.com',
-            'cherlopallijayasimha@gmail.com'
-			# 'Barkha.Singh@cognizant.com'
-		]
-	},
-	Message={
-		'Subject':{
-			'Data' : 'SES DEMO By Lambda',
-			'Charset' : 'UTF-8'
-		},
-		'Body':{
-            'Text':{
-                'Data' : body,
+    body = """
+    Hello, This is from Lambda, implemented by Jay
+    Thanks & Regards,
+    Jayasimha
+    """
+
+    ses.send_email(
+        Source = 'cherlopallijayasimha@gmail.com',
+        Destination={
+            'ToAddresses': [
+                # 'jayasimha.cherlopalli@cognizant.com'
+                'cherlopallijayasimha@gmail.com'
+                # 'Barkha.Singh@cognizant.com'
+            ]
+        },
+        Message={
+            'Subject':{
+                'Data' : 'SES DEMO By Lambda',
                 'Charset' : 'UTF-8'
+            },
+            'Body':{
+                'Text':{
+                    'Data' : body,
+                    'Charset' : 'UTF-8'
+                }
             }
         }
-	}
-)
+    )
+
+    return None
